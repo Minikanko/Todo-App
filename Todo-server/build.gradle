@@ -27,6 +27,17 @@ dependencies {
 	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	
+	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-jdbc
+	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-jdbc', version: '2.3.0.RELEASE'
+	//mariadb jdbc
+	implementation group: 'org.mariadb.jdbc', name: 'mariadb-java-client', version: '2.7.2'
+	//log4j
+	implementation group: 'org.bgee.log4jdbc-log4j2', name: 'log4jdbc-log4j2-jdbc4', version: '1.16'
+	//optional
+	testCompile group: 'com.github.npathai', name: 'hamcrest-optional', version: '2.0.0'
+	
+	
 }
 
 test {

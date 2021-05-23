@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.todo.app.mvc.repository.TodoListRepository">
+	<select id="findTodoListBySeq" resultType="com.todo.app.mvc.domain.TodoList">
+		SELECT
+			CONTEXT,
+			TARGET_DT,
+			REG_DT,
+			IS_COMPLETE,
+			MODIFY_DT
+		FROM TODOLISTPTCL
+		WHERE SEQ=#{seq}
+	</select>
+	
+	<select id="getAllTodoList" resultType="com.todo.app.mvc.domain.TodoList">
+		SELECT
+			SEQ,
+			CONTEXT,
+			TARGET_DT,
+			REG_DT,
+			IS_COMPLETE,
+			MODIFY_DT
+		FROM TODOLISTPTCL
+	</select>
+	
+	<insert id="registerTodoList" parameterType="com.todo.app.mvc.domain.TodoList">
+		INSERT INTO TODOLISTPTCL
+		(
+			CONTEXT,
+			TARGET_DT,
+			REG_ID
+		)
+		VALUES
+		(
+			#{context},
+			#{targetDt},
+			#{regId}
+		)
+		<selectKey keyProperty="seq" resultType="String" order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+	
+	<update id="updateTodoList" parameterType="com.todo.app.mvc.domain.TodoList">
+		UPDATE TODOLISTPTCL 
+		SET 
+			CONTEXT=#{context},
+			TARGET_DT=#{targetDt}
+		WHERE SEQ=#{seq}
+	</update>
+	
+	<update id="updateTodoListComplete" parameterType="com.todo.app.mvc.domain.TodoList">
+		UPDATE TODOLISTPTCL 
+		SET 
+			IS_COMPLETE=#{isComplete}
+		WHERE SEQ=#{seq}
+	</update>
+	
+	<delete id="deleteTodoList">
+		DELETE FROM TODOLISTPTCL WHERE SEQ=#{seq}
+	</delete>
+</mapper>

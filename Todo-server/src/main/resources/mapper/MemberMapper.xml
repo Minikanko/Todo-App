@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.todo.app.mvc.repository.MemberRepository">
+	<select id="findMemberById" resultType="com.todo.app.mvc.domain.Member">
+		SELECT ID,NAME,EMAIL,REG_DT FROM MEMBER WHERE ID=#{id}
+	</select>
+	
+	<select id="findMemberByIdAndPw" resultType="com.todo.app.mvc.domain.Member">
+		SELECT ID,NAME,EMAIL,REG_DT FROM MEMBER WHERE ID=#{id} and PASSWORD=#{password}
+	</select>
+
+	<insert id="registerMember" parameterType="com.todo.app.mvc.domain.Member">
+		INSERT INTO MEMBER(ID,PASSWORD,NAME,EMAIL)
+		VALUES(#{id},#{password},#{name},#{email})
+	</insert>
+</mapper>
