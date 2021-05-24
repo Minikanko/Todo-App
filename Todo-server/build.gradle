@@ -36,7 +36,11 @@ dependencies {
 	implementation group: 'org.bgee.log4jdbc-log4j2', name: 'log4jdbc-log4j2-jdbc4', version: '1.16'
 	//optional
 	testCompile group: 'com.github.npathai', name: 'hamcrest-optional', version: '2.0.0'
-	
+	// commons-lang3 라이브러리는 테스트 데이터 랜덤 문자열 생성 및 공백체크등에 사용됨
+	implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.12.0'
+	// swagger 라이브러리와 화면을 보여주기 위한 ui 라이브러리 가져옴
+	implementation group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2'
+	implementation group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.9.2'
 	
 }
 
