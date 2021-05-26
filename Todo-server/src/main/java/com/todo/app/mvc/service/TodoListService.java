@@ -4,15 +4,14 @@ import java.util.List;
 import java.util.Optional;
 
 import com.todo.app.mvc.domain.TodoList;
+import com.todo.app.mvc.domain.TodoListParameter;
 
 public interface TodoListService {
 	public Optional<TodoList> findOneTodoList(String seq);
 	
-	public List<TodoList> getAllTodoList(String seq);
+	public List<TodoList> getAllTodoList();
 	
-	public void addTodoList(TodoList todoList);
-	
-	public void updateTodoList(TodoList todoList);
+	public void saveTodoList(TodoListParameter todoListParameter);
 	
 	public void updateTodoListComplete(TodoList todoList);
 	

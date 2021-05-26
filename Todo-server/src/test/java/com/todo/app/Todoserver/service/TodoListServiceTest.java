@@ -29,12 +29,12 @@ public class TodoListServiceTest {
 		todo.setContext("test");
 		todo.setTargetDt("2021-05-22");
 		todo.setRegId("user1");
-		todo.setIsComplete(TodoListCompleteType.NOTCOMPLETE);
+		todo.setIsComplete(TodoListCompleteType.Y);
     }
 	
 	@Test
 	void todo등록하기() {
-		todoServiceImpl.addTodoList(todo);
+		todoServiceImpl.saveTodoList(todo);
 		TodoList result = todoServiceImpl.findOneTodoList(todo.getSeq()).get();
 		assertEquals(todo.getContext(), result.getContext());
 	}
@@ -43,7 +43,7 @@ public class TodoListServiceTest {
 	void todo수정하기() {
 		todo.setContext("test수정");
 		
-		todoServiceImpl.updateTodoList(todo);
+		todoServiceImpl.saveTodoList(todo);
 		
 		TodoList result = todoServiceImpl.findOneTodoList(todo.getSeq()).get();
 		assertEquals(todo.getContext(), result.getContext());

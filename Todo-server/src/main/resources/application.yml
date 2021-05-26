@@ -9,6 +9,6 @@ spring:
       jdbc-url: jdbc:log4jdbc:mariadb://localhost:3306/todo?allowMultiQueries=true&serverTimezone=Asia/Seoul&characterEncoding=UTF-8
       username: bcgrhio
       password: 1q2w3e4r
-      
+
 logging:
   config: classpath:logback/logback-default.xml

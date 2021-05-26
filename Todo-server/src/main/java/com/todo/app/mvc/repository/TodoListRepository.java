@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.stereotype.Repository;
 
 import com.todo.app.mvc.domain.TodoList;
+import com.todo.app.mvc.domain.TodoListParameter;
 
 @Repository
 public interface TodoListRepository {
@@ -14,9 +15,9 @@ public interface TodoListRepository {
 	
 	List<TodoList> getAllTodoList();
 	
-	void registerTodoList(TodoList todoList);
+	void registerTodoList(TodoListParameter todoListParameter);
 	
-	void updateTodoList(TodoList todoList);
+	void updateTodoList(TodoListParameter todoListParameter);
 	
 	void updateTodoListComplete(TodoList todoList);
 	

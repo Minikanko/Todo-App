@@ -8,10 +8,9 @@ import lombok.Getter;
  * @Version 	: 1.0
  * @Method Info : TodoList 완료여부 enum
  */
-@Getter
-public enum TodoListCompleteType {
+public enum TodoListCompleteType implements BaseCodeLabelEnum{
 	
-	COMPLETE("Y"), NOTCOMPLETE("N");
+	Y("COMPLETE"), N("NOTCOMPLETE");
 	
 	private String code;
 	private String label;
@@ -19,6 +18,16 @@ public enum TodoListCompleteType {
 	TodoListCompleteType(String label) {
 		this.code = name();
 		this.label = label;
+	}
+
+	@Override
+	public String code() {
+		return this.code;
+	}
+
+	@Override
+	public String label() {
+		return this.label;
 	}
 	
 }

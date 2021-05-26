@@ -4,6 +4,7 @@
 <mapper namespace="com.todo.app.mvc.repository.TodoListRepository">
 	<select id="findTodoListBySeq" resultType="com.todo.app.mvc.domain.TodoList">
 		SELECT
+			SEQ,
 			CONTEXT,
 			TARGET_DT,
 			REG_DT,
@@ -24,7 +25,7 @@
 		FROM TODOLISTPTCL
 	</select>
 	
-	<insert id="registerTodoList" parameterType="com.todo.app.mvc.domain.TodoList">
+	<insert id="registerTodoList" parameterType="com.todo.app.mvc.domain.TodoListParameter">
 		INSERT INTO TODOLISTPTCL
 		(
 			CONTEXT,
@@ -42,18 +43,20 @@
 		</selectKey>
 	</insert>
 	
-	<update id="updateTodoList" parameterType="com.todo.app.mvc.domain.TodoList">
+	<update id="updateTodoList" parameterType="com.todo.app.mvc.domain.TodoListParameter">
 		UPDATE TODOLISTPTCL 
 		SET 
 			CONTEXT=#{context},
-			TARGET_DT=#{targetDt}
+			TARGET_DT=#{targetDt},
+			MODIFY_DT=NOW()
 		WHERE SEQ=#{seq}
 	</update>
 	
 	<update id="updateTodoListComplete" parameterType="com.todo.app.mvc.domain.TodoList">
 		UPDATE TODOLISTPTCL 
 		SET 
-			IS_COMPLETE=#{isComplete}
+			IS_COMPLETE=#{isComplete},
+			MODIFY_DT=NOW()
 		WHERE SEQ=#{seq}
 	</update>
 	
