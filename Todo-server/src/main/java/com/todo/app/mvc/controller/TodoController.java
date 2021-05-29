@@ -55,7 +55,7 @@ public class TodoController {
 	@ApiImplicitParams({
 		@ApiImplicitParam(name="seq", value="일정 번호",  example="1"),
 		@ApiImplicitParam(name="context", value="일정 내용",  example="코딩하기"),
-		@ApiImplicitParam(name="targetDt", value="일정 기간",  example="2021-05-24")
+		@ApiImplicitParam(name="targetDt", value="일정 기간",  example="2021-05-29")
 	})
 	public BaseResponse<String> save(TodoListParameter todoListParameter){
 		if(StringUtils.isEmpty(todoListParameter.getContext())) {
@@ -87,8 +87,8 @@ public class TodoController {
 		if(StringUtils.isEmpty(todoList.getSeq())) {
 			throw new BaseException(BaseResponseCode.VALIDATE_REQUIED, new String[]{"seq","일정 번호"});
 		}
-		Optional<TodoList> result = todoListService.findOneTodoList(todoList.getSeq());
-		if(!result.isPresent()) {
+		TodoList result = todoListService.findOneTodoList(todoList.getSeq());
+		if(result == null) {
 			return new BaseResponse<Boolean>(false);
 		}
 		
@@ -108,8 +108,8 @@ public class TodoController {
 		@ApiImplicitParam(name="seq", value="일정 번호", example="1")
 	})
 	public BaseResponse<Boolean> delete(@PathVariable String seq){
-		Optional<TodoList> result = todoListService.findOneTodoList(seq);
-		if(!result.isPresent()) {
+		TodoList result = todoListService.findOneTodoList(seq);
+		if(result == null) {
 			return new BaseResponse<Boolean>(false);
 		}
 		
@@ -128,12 +128,12 @@ public class TodoController {
 		@ApiImplicitParam(name="seq", value="일정 번호", example="1")
 	})
 	public BaseResponse<TodoList> get(@PathVariable String seq){
-		Optional<TodoList> result = todoListService.findOneTodoList(seq);
-		if(!result.isPresent()) {
+		TodoList result = todoListService.findOneTodoList(seq);
+		if(result == null) {
 			throw new BaseException(BaseResponseCode.DATA_IS_NULL, new String[] {"일정"});
 		}
-		logger.debug("일정상세보기 : {}",result.get());
-		return new BaseResponse<TodoList>(result.get());
+		logger.debug("일정상세보기 : {}",result);
+		return new BaseResponse<TodoList>(result);
 	}
 	
 	/**
@@ -141,9 +141,8 @@ public class TodoController {
 	 * @return	
 	 */
 	@GetMapping("list")
-	@ApiOperation(value="일정 전체 가져오기", notes="일정 전체를 조회")
+	@ApiOperation(value="특정일 일정 전체 가져오기", notes="특정 일정 전체를 조회")
 	public BaseResponse<List<TodoList>> getList(){
-		return new BaseResponse<List<TodoList>>(todoListService.getAllTodoList());
+		return new BaseResponse<List<TodoList>>(todoListService.getAllTodoListByDay());
 	}
-
 }

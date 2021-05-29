@@ -7,9 +7,9 @@ import com.todo.app.mvc.domain.TodoList;
 import com.todo.app.mvc.domain.TodoListParameter;
 
 public interface TodoListService {
-	public Optional<TodoList> findOneTodoList(String seq);
+	public TodoList findOneTodoList(String seq);
 	
-	public List<TodoList> getAllTodoList();
+	public List<TodoList> getAllTodoListByDay();
 	
 	public void saveTodoList(TodoListParameter todoListParameter);
 	

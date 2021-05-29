@@ -1,8 +1,11 @@
 package com.todo.app.mvc.service;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,18 +25,21 @@ public class TodoListServiceImpl implements TodoListService {
 	 * @return	
 	 */
 	@Override
-	public Optional<TodoList> findOneTodoList(String seq) {
+	public TodoList findOneTodoList(String seq) {
 		return todoListRepository.findTodoListBySeq(seq);
 	}
 	
 	@Override
-	public List<TodoList> getAllTodoList() {
-		return todoListRepository.getAllTodoList();
+	public List<TodoList> getAllTodoListByDay() {
+		SimpleDateFormat dtFormat = new SimpleDateFormat("yyyy-MM-dd");
+		Calendar cal = Calendar.getInstance();
+		return todoListRepository.getAllTodoListByDay(dtFormat.format(cal.getTime()));
 	}
+	
 	
 	@Override
 	public void saveTodoList(TodoListParameter todoListParameter) {
-		if(todoListParameter.getSeq().isEmpty()) {
+		if(StringUtils.isEmpty(todoListParameter.getSeq())) {
 			todoListRepository.registerTodoList(todoListParameter);
 		}
 		else {
@@ -55,6 +61,5 @@ public class TodoListServiceImpl implements TodoListService {
 	public void deleteTodoList(String seq) {
 		todoListRepository.deleteTodoList(seq);
 	}
-
 
 }

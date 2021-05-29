@@ -3,6 +3,8 @@ package com.todo.app.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -10,7 +12,7 @@ import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.todo.app.mvc.domain.BaseCodeLabelEnum;
 
 @Configuration
-public class WebConfig {
+public class WebConfig implements WebMvcConfigurer{
 	
 	@Bean
 	public ObjectMapper objectMapper() {
@@ -36,4 +38,10 @@ public class WebConfig {
 		jsonView.setObjectMapper(objectMapper());
 		return jsonView;
 	}
+
+	@Override
+	public void addCorsMappings(CorsRegistry registry) {
+		registry.addMapping("/**").allowedOrigins("http://localhost:8081");
+	}
+	
 }

@@ -11,9 +11,11 @@ import com.todo.app.mvc.domain.TodoListParameter;
 @Repository
 public interface TodoListRepository {
 	
-	Optional<TodoList> findTodoListBySeq(String seq);
+	TodoList findTodoListBySeq(String seq);
 	
 	List<TodoList> getAllTodoList();
+	
+	List<TodoList> getAllTodoListByDay(String targetDt);
 	
 	void registerTodoList(TodoListParameter todoListParameter);
 	

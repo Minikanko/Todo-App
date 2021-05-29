@@ -14,6 +14,18 @@
 		WHERE SEQ=#{seq}
 	</select>
 	
+	<select id="getAllTodoListByDay" resultType="com.todo.app.mvc.domain.TodoList">
+		SELECT
+			SEQ,
+			CONTEXT,
+			TARGET_DT,
+			REG_DT,
+			IS_COMPLETE,
+			MODIFY_DT
+		FROM TODOLISTPTCL
+		WHERE TARGET_DT=#{targetDt}
+	</select>
+	
 	<select id="getAllTodoList" resultType="com.todo.app.mvc.domain.TodoList">
 		SELECT
 			SEQ,
