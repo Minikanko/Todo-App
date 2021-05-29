@@ -1,16 +1,16 @@
 package com.todo.app.mvc.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -50,14 +50,14 @@ public class TodoController {
 	 * @param todolist
 	 * @return	
 	 */
-	@PutMapping("save")
+	@PostMapping("save")
 	@ApiOperation(value="등록 / 수정 처리", notes="신규 일정 저장 및 기존 일정 업데이트할때 사용")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name="seq", value="일정 번호",  example="1"),
 		@ApiImplicitParam(name="context", value="일정 내용",  example="코딩하기"),
 		@ApiImplicitParam(name="targetDt", value="일정 기간",  example="2021-05-29")
 	})
-	public BaseResponse<String> save(TodoListParameter todoListParameter){
+	public BaseResponse<String> save(@RequestBody TodoListParameter todoListParameter){
 		if(StringUtils.isEmpty(todoListParameter.getContext())) {
 			throw new BaseException(BaseResponseCode.VALIDATE_REQUIED, new String[]{"context","일정 내용"});
 		}
@@ -67,7 +67,7 @@ public class TodoController {
 		if(StringUtils.isEmpty(todoListParameter.getRegId())) {
 			throw new BaseException(BaseResponseCode.VALIDATE_REQUIED, new String[]{"id","작성자"});
 		}
-		
+		logger.debug("등록하기 : {}",todoListParameter);
 		todoListService.saveTodoList(todoListParameter);
 		return new BaseResponse<String>(todoListParameter.getSeq());
 	}

@@ -24,6 +24,7 @@
 			MODIFY_DT
 		FROM TODOLISTPTCL
 		WHERE TARGET_DT=#{targetDt}
+		ORDER BY IS_COMPLETE
 	</select>
 	
 	<select id="getAllTodoList" resultType="com.todo.app.mvc.domain.TodoList">
