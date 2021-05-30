@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,7 +34,7 @@ import io.swagger.annotations.ApiOperation;
  * @Method Info : TodoController
  */
 @RestController
-@RequestMapping("/todo/")
+@RequestMapping("/todo")
 @Api(tags="Todo API")
 public class TodoController {
 	
@@ -50,7 +51,7 @@ public class TodoController {
 	 * @param todolist
 	 * @return	
 	 */
-	@PostMapping("save")
+	@PostMapping("/save")
 	@ApiOperation(value="등록 / 수정 처리", notes="신규 일정 저장 및 기존 일정 업데이트할때 사용")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name="seq", value="일정 번호",  example="1"),
@@ -77,7 +78,7 @@ public class TodoController {
 	 * @param todolist
 	 * @return	
 	 */
-	@PutMapping("updatestatus")
+	@PutMapping("/updatestatus")
 	@ApiOperation(value="일정완료여부 변경", notes="일정 완료여부 변경")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name="seq", value="일정 번호",  example="1"),
@@ -102,7 +103,7 @@ public class TodoController {
 	 * @param seq
 	 * @return	
 	 */
-	@DeleteMapping("{seq}")
+	@DeleteMapping("/{seq}")
 	@ApiOperation(value="삭제 처리", notes = "일정 번호에 해당하는 정보를 삭제")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name="seq", value="일정 번호", example="1")
@@ -122,7 +123,7 @@ public class TodoController {
 	 * @param seq
 	 * @return	
 	 */
-	@GetMapping("{seq}")
+	@GetMapping("/{seq}")
 	@ApiOperation(value="일정 상세보기", notes="일정 번호에 해당하는 상세 정보를 조회")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name="seq", value="일정 번호", example="1")
@@ -140,7 +141,7 @@ public class TodoController {
 	 * 일정 전체 조회
 	 * @return	
 	 */
-	@GetMapping("list")
+	@GetMapping("/list")
 	@ApiOperation(value="특정일 일정 전체 가져오기", notes="특정 일정 전체를 조회")
 	public BaseResponse<List<TodoList>> getList(){
 		return new BaseResponse<List<TodoList>>(todoListService.getAllTodoListByDay());
