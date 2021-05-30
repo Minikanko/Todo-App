@@ -5,7 +5,6 @@ import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.todo.app.mvc.domain.BaseResponse;
 import com.todo.app.mvc.domain.BaseResponseCode;
+import com.todo.app.mvc.domain.CompleteRate;
 import com.todo.app.mvc.domain.TodoList;
 import com.todo.app.mvc.domain.TodoListParameter;
 import com.todo.app.mvc.exception.BaseException;
@@ -66,7 +66,7 @@ public class TodoController {
 			throw new BaseException(BaseResponseCode.VALIDATE_REQUIED, new String[]{"tagetDt","일정 기간"});
 		}
 		if(StringUtils.isEmpty(todoListParameter.getRegId())) {
-			throw new BaseException(BaseResponseCode.VALIDATE_REQUIED, new String[]{"id","작성자"});
+			throw new BaseException(BaseResponseCode.VALIDATE_REQUIED, new String[]{"regId","작성자"});
 		}
 		logger.debug("등록하기 : {}",todoListParameter);
 		todoListService.saveTodoList(todoListParameter);
@@ -142,8 +142,22 @@ public class TodoController {
 	 * @return	
 	 */
 	@GetMapping("/list")
-	@ApiOperation(value="특정일 일정 전체 가져오기", notes="특정 일정 전체를 조회")
+	@ApiOperation(value="특정일 일정 전체 가져오기", notes="특정일의 일정 전체를 조회")
 	public BaseResponse<List<TodoList>> getList(){
 		return new BaseResponse<List<TodoList>>(todoListService.getAllTodoListByDay());
+	}
+	
+	@GetMapping("/completeRate/{targetDt}")
+	@ApiOperation(value="특정일의 완료율 가져오기", notes="특정일의 완료율 조회")
+	public BaseResponse<CompleteRate> getCompleteRate(@PathVariable String targetDt){
+//		프론트엔드에서 인증 부분 구현 되면 오픈예정
+//		if(StringUtils.isEmpty(regId)) {
+//			throw new BaseException(BaseResponseCode.VALIDATE_REQUIED, new String[]{"regId","등록자 ID"});
+//		}
+		if(StringUtils.isEmpty(targetDt)) {
+			throw new BaseException(BaseResponseCode.VALIDATE_REQUIED, new String[]{"targetDt","조회할 날짜"});
+		}
+		
+		return new BaseResponse<CompleteRate>(todoListService.getCompleteRate(targetDt));
 	}
 }

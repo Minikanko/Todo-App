@@ -3,6 +3,7 @@ package com.todo.app.mvc.service;
 import java.util.List;
 import java.util.Optional;
 
+import com.todo.app.mvc.domain.CompleteRate;
 import com.todo.app.mvc.domain.TodoList;
 import com.todo.app.mvc.domain.TodoListParameter;
 
@@ -10,6 +11,8 @@ public interface TodoListService {
 	public TodoList findOneTodoList(String seq);
 	
 	public List<TodoList> getAllTodoListByDay();
+	
+	public CompleteRate getCompleteRate(String targetDt);
 	
 	public void saveTodoList(TodoListParameter todoListParameter);
 	

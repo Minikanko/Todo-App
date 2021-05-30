@@ -1,10 +1,10 @@
 package com.todo.app.mvc.repository;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.stereotype.Repository;
 
+import com.todo.app.mvc.domain.CompleteRate;
 import com.todo.app.mvc.domain.TodoList;
 import com.todo.app.mvc.domain.TodoListParameter;
 
@@ -16,6 +16,8 @@ public interface TodoListRepository {
 	List<TodoList> getAllTodoList();
 	
 	List<TodoList> getAllTodoListByDay(String targetDt);
+	
+	CompleteRate getCompleteRateByDay(String targetDt);
 	
 	void registerTodoList(TodoListParameter todoListParameter);
 	

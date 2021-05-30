@@ -9,6 +9,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.todo.app.mvc.domain.CompleteRate;
 import com.todo.app.mvc.domain.TodoList;
 import com.todo.app.mvc.domain.TodoListParameter;
 import com.todo.app.mvc.repository.TodoListRepository;
@@ -60,6 +61,11 @@ public class TodoListServiceImpl implements TodoListService {
 	@Override
 	public void deleteTodoList(String seq) {
 		todoListRepository.deleteTodoList(seq);
+	}
+	
+	@Override
+	public CompleteRate getCompleteRate(String targetDt) {
+		return todoListRepository.getCompleteRateByDay(targetDt);
 	}
 
 }

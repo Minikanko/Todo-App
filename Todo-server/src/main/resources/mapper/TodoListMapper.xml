@@ -38,6 +38,16 @@
 		FROM TODOLISTPTCL
 	</select>
 	
+	<select id="getCompleteRateByDay" resultType="com.todo.app.mvc.domain.CompleteRate">
+		SELECT
+			REG_ID,
+			TARGET_DT,
+			COMPLETE_RATE
+		FROM TODODAYCLOSE
+		WHERE TARGET_DT=#{targetDt}
+		AND REG_ID='user1'
+	</select>
+	
 	<insert id="registerTodoList" parameterType="com.todo.app.mvc.domain.TodoListParameter">
 		INSERT INTO TODOLISTPTCL
 		(
