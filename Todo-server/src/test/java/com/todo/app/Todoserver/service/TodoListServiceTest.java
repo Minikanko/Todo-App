@@ -1,8 +1,8 @@
 package com.todo.app.Todoserver.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
-import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,7 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.todo.app.mvc.domain.TodoList;
-import com.todo.app.mvc.domain.TodoListCompleteType;
+import com.todo.app.mvc.domain.TodoListParameter;
 import com.todo.app.mvc.service.TodoListService;
 
 @SpringBootTest
@@ -21,21 +21,20 @@ public class TodoListServiceTest {
 	@Autowired
 	TodoListService todoServiceImpl;
 	
-	TodoList todo;
+	TodoListParameter todo;
 	
 	@BeforeEach
     public void init() {
-		todo = new TodoList();
+		todo = new TodoListParameter();
 		todo.setContext("test");
 		todo.setTargetDt("2021-05-22");
 		todo.setRegId("user1");
-		todo.setIsComplete(TodoListCompleteType.Y);
     }
 	
 	@Test
 	void todo등록하기() {
 		todoServiceImpl.saveTodoList(todo);
-		TodoList result = todoServiceImpl.findOneTodoList(todo.getSeq()).get();
+		TodoList result = todoServiceImpl.findOneTodoList(todo.getSeq());
 		assertEquals(todo.getContext(), result.getContext());
 	}
 	
@@ -45,7 +44,7 @@ public class TodoListServiceTest {
 		
 		todoServiceImpl.saveTodoList(todo);
 		
-		TodoList result = todoServiceImpl.findOneTodoList(todo.getSeq()).get();
+		TodoList result = todoServiceImpl.findOneTodoList(todo.getSeq());
 		assertEquals(todo.getContext(), result.getContext());
 	}
 	
@@ -53,8 +52,8 @@ public class TodoListServiceTest {
 	void todo삭제하기() {
 		todoServiceImpl.deleteTodoList(todo.getSeq());
 		
-		Optional<TodoList> result = todoServiceImpl.findOneTodoList(todo.getSeq());
-		assertEquals(result.isPresent(), false);
+		TodoList result = todoServiceImpl.findOneTodoList(todo.getSeq());
+		assertNull(result);
 		
 	}
 }
