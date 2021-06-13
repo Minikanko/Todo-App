@@ -68,7 +68,7 @@ public class TodoController {
 		if(StringUtils.isEmpty(todoListParameter.getRegId())) {
 			throw new BaseException(BaseResponseCode.VALIDATE_REQUIED, new String[]{"regId","작성자"});
 		}
-		logger.debug("등록하기 : {}",todoListParameter);
+		logger.debug("저장하기 : {}",todoListParameter);
 		todoListService.saveTodoList(todoListParameter);
 		return new BaseResponse<String>(todoListParameter.getSeq());
 	}

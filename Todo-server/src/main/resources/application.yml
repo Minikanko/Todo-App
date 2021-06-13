@@ -6,9 +6,12 @@ spring:
     hikari:
       driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
       #allowMultiQueries=true는 mysql에서 다중쿼리 실행이 가능하도록 하는 옵션값(mssql, oracle은 이런 옵션이 없음)
-      jdbc-url: jdbc:log4jdbc:mariadb://localhost:3306/todo?allowMultiQueries=true&serverTimezone=Asia/Seoul&characterEncoding=UTF-8
-      username: bcgrhio
-      password: 1q2w3e4r
+      jdbc-url: jdbc:log4jdbc:mariadb://todoapp-mariadb.cuyqec6kkdml.us-east-2.rds.amazonaws.com:3306/todo?allowMultiQueries=true&serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+      username: ENC(DAavlL/qFn7giVFXogA+0K/1JrYypp89HfQGAIDX0b4yK/UFG5c9bFFT32c750nq)
+      password: ENC(WzVnHQ1xtVn8D6j/G49kcstDVZM4D0DoIq5fA9aBehFXaxhCdI1o01OYOwrVHkNN)
+  profiles:
+    active: local
 
 logging:
   config: classpath:logback/logback-default.xml
+

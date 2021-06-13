@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +27,9 @@ public class TodoListServiceImpl implements TodoListService {
 	 * @param seq
 	 * @return	
 	 */
+	
+	Logger logger = LoggerFactory.getLogger(getClass());
+	
 	@Override
 	public TodoList findOneTodoList(String seq) {
 		return todoListRepository.findTodoListBySeq(seq);
@@ -40,7 +45,8 @@ public class TodoListServiceImpl implements TodoListService {
 	
 	@Override
 	public void saveTodoList(TodoListParameter todoListParameter) {
-		if(StringUtils.isEmpty(todoListParameter.getSeq())) {
+		logger.debug("string:{}",todoListParameter.getSeq());
+		if(StringUtils.isBlank(todoListParameter.getSeq())) {
 			todoListRepository.registerTodoList(todoListParameter);
 		}
 		else {
