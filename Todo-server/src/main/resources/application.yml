@@ -9,9 +9,11 @@ spring:
       jdbc-url: jdbc:log4jdbc:mariadb://todoapp-mariadb.cuyqec6kkdml.us-east-2.rds.amazonaws.com:3306/todo?allowMultiQueries=true&serverTimezone=Asia/Seoul&characterEncoding=UTF-8
       username: ENC(DAavlL/qFn7giVFXogA+0K/1JrYypp89HfQGAIDX0b4yK/UFG5c9bFFT32c750nq)
       password: ENC(WzVnHQ1xtVn8D6j/G49kcstDVZM4D0DoIq5fA9aBehFXaxhCdI1o01OYOwrVHkNN)
-  profiles:
-    active: local
 
 logging:
   config: classpath:logback/logback-default.xml
+
+jasypt:
+  encryptor:
+    bean: jasyptStringEncryptor
 
